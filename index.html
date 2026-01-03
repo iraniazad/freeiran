@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>آرشیو اسناد و مدارک</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --text-color: #e0e0e0;
+            --accent-color: #d32f2f;
+            --secondary-text: #b0b0b0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Tahoma, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+
+        header {
+            background-color: var(--card-bg);
+            padding: 2rem 1rem;
+            text-align: center;
+            border-bottom: 3px solid var(--accent-color);
+            margin-bottom: 2rem;
+        }
+
+        header h1 { font-size: 1.8rem; margin-bottom: 0.5rem; color: #fff; }
+        header p { color: var(--secondary-text); font-size: 0.9rem; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .doc-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #333;
+            transition: transform 0.2s;
+        }
+
+        .doc-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        /* استایل اختصاصی برای ویدیوها */
+        .video-wrapper {
+            width: 100%;
+            position: relative;
+            background: #000;
+        }
+        
+        /* این کلاس باعث می‌شود ویدیو همیشه سایز مناسب داشته باشد */
+        iframe {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border: none;
+            display: block;
+        }
+
+        .card-content {
+            padding: 15px;
+        }
+
+        .doc-date {
+            font-size: 0.8rem;
+            color: var(--accent-color);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .doc-title {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .doc-desc {
+            font-size: 0.85rem;
+            color: var(--secondary-text);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            font-size: 0.8rem;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>پایگاه اسناد مردمی</h1>
+        <p>آرشیو ویدیوهای ارسالی و مدارک</p>
+    </header>
+
+    <main class="container">
+
+        <!-- ویدیو شماره ۱ -->
+        <article class="doc-card">
+            <div class="video-wrapper">
+                <iframe 
+                    src="https://odysee.com/$/embed/Z:2e2?r=PD4xSqgmz2XHRwrmr3JLLfP5LBfNabFz" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="card-content">
+                <span class="doc-date">۱۴۰۴/۱۰/۱۳</span>
+                <h3 class="doc-title">مدرک ویدیویی شماره ۱</h3>
+                <p class="doc-desc">توضیحات مربوط به این ویدیو را اینجا بنویسید (مثلا: درگیری در خیابان ... ساعت ...)</p>
+            </div>
+        </article>
+
+        <!-- ویدیو شماره ۲ (ضرب و شتم) -->
+        <article class="doc-card">
+            <div class="video-wrapper">
+                <iframe 
+                    src="https://odysee.com/$/embed/Beating-a-protester-with-a-baton---Iran:4?r=PD4xSqgmz2XHRwrmr3JLLfP5LBfNabFz" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="card-content">
+                <span class="doc-date">۱۴۰۴/۱۰/۱۳</span>
+                <h3 class="doc-title">ضرب و شتم معترض با باتون</h3>
+                <p class="doc-desc">هشدار: این ویدیو حاوی صحنه‌های خشونت‌آمیز برخورد نیروهای امنیتی است.</p>
+            </div>
+        </article>
+
+        <!-- ویدیو شماره ۳ -->
+        <article class="doc-card">
+            <div class="video-wrapper">
+                <iframe 
+                    src="https://odysee.com/$/embed/VID_20260103_012853_536:8?r=PD4xSqgmz2XHRwrmr3JLLfP5LBfNabFz" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="card-content">
+                <span class="doc-date">۱۴۰۴/۱۰/۱۳</span>
+                <h3 class="doc-title">سند ویدیویی (کد 536)</h3>
+                <p class="doc-desc">محل و زمان دقیق این ویدیو در حال بررسی است.</p>
+            </div>
+        </article>
+
+        <!-- ویدیو شماره ۴ -->
+        <article class="doc-card">
+            <div class="video-wrapper">
+                <iframe 
+                    src="https://odysee.com/$/embed/VID_20260103_011816_461:d?r=PD4xSqgmz2XHRwrmr3JLLfP5LBfNabFz" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="card-content">
+                <span class="doc-date">۱۴۰۴/۱۰/۱۳</span>
+                <h3 class="doc-title">سند ویدیویی (کد 461)</h3>
+                <p class="doc-desc">توضیحات تکمیلی درباره شواهد موجود در این فیلم.</p>
+            </div>
+        </article>
+
+    </main>
+
+    <footer>
+        <p>ارتباط امن بماند.</p>
+    </footer>
+
+</body>
+</html>
