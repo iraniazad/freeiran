@@ -3,71 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>آرشیو اسناد و مدارک</title>
+    
+    <!-- تنظیمات سئو و کلمات کلیدی (بسیار مهم برای گوگل) -->
+    <title>آرشیو اسناد اعتراضات ایران | Iran Protests Archive</title>
+    <meta name="description" content="پایگاه داده اسناد و ویدیوهای اعتراضات سراسری ایران. Iran Protests Evidence Archive. Documenting human rights violations and crackdown footage from Woman Life Freedom movement.">
+    <meta name="keywords" content="Iran Protests, Mahsa Amini, Woman Life Freedom, IRGC crimes, Human Rights, اعتراضات ایران, زن زندگی آزادی, مهسا امینی, جنایات سپاه, اسناد انقلاب, ویدیو اعتراضات, سرکوب">
+    <meta name="robots" content="index, follow">
+    
+    <!-- فونت وزیرمتن از گوگل فونت -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+
     <style>
         :root {
             --bg-color: #121212;
             --card-bg: #1e1e1e;
-            --text-color: #e0e0e0;
-            --accent-color: #d32f2f;
+            --text-color: #f5f5f5;
+            --accent-color: #d32f2f; /* قرمز */
             --secondary-text: #b0b0b0;
+            --font-fa: 'Vazirmatn', sans-serif;
+            --font-en: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: Tahoma, Arial, sans-serif;
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
-            padding-bottom: 50px;
+            font-family: var(--font-fa);
+            transition: all 0.3s ease;
         }
 
+        /* کلاس مخصوص زبان انگلیسی */
+        body.en-lang {
+            font-family: var(--font-en);
+            direction: ltr;
+        }
+
+        /* هدر و دکمه تغییر زبان */
         header {
             background-color: var(--card-bg);
             padding: 2rem 1rem;
             text-align: center;
             border-bottom: 3px solid var(--accent-color);
-            margin-bottom: 2rem;
+            position: relative;
         }
 
-        header h1 { font-size: 1.8rem; margin-bottom: 0.5rem; color: #fff; }
-        header p { color: var(--secondary-text); font-size: 0.9rem; }
+        .lang-switch {
+            position: absolute;
+            top: 20px;
+            left: 20px; /* پیش‌فرض برای فارسی */
+        }
+        
+        body.en-lang .lang-switch {
+            left: auto;
+            right: 20px;
+        }
 
+        .lang-btn {
+            background: #333;
+            color: #fff;
+            border: 1px solid #555;
+            padding: 5px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .lang-btn:hover { background: var(--accent-color); border-color: var(--accent-color); }
+
+        header h1 { font-size: 2rem; margin-bottom: 0.5rem; font-weight: 800; }
+        header p { color: var(--secondary-text); font-size: 1rem; }
+
+        /* کانتینر اصلی */
         .container {
             max-width: 1200px;
-            margin: 0 auto;
+            margin: 2rem auto;
             padding: 0 1rem;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
         }
 
+        /* کارت‌ها */
         .doc-card {
             background-color: var(--card-bg);
-            border-radius: 8px;
+            border-radius: 10px;
             overflow: hidden;
             border: 1px solid #333;
-            transition: transform 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .doc-card:hover {
             border-color: var(--accent-color);
-            transform: translateY(-3px);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(211, 47, 47, 0.2);
         }
 
-        /* استایل اختصاصی برای ویدیوها */
         .video-wrapper {
             width: 100%;
             position: relative;
             background: #000;
         }
         
-        /* این کلاس باعث می‌شود ویدیو همیشه سایز مناسب داشته باشد */
         iframe {
             width: 100%;
             aspect-ratio: 16 / 9;
@@ -75,110 +120,142 @@
             display: block;
         }
 
-        .card-content {
-            padding: 15px;
-        }
+        .card-content { padding: 20px; }
 
         .doc-date {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--accent-color);
             display: block;
             margin-bottom: 8px;
+            font-weight: bold;
         }
 
-        .doc-title {
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-            color: #fff;
-        }
-
-        .doc-desc {
-            font-size: 0.85rem;
-            color: var(--secondary-text);
-        }
+        .doc-title { font-size: 1.2rem; margin-bottom: 10px; color: #fff; }
+        .doc-desc { font-size: 0.9rem; color: var(--secondary-text); }
         
         footer {
             text-align: center;
-            margin-top: 3rem;
+            margin-top: 4rem;
+            padding: 2rem;
+            background: var(--card-bg);
             font-size: 0.8rem;
-            color: #555;
+            color: #666;
+            border-top: 1px solid #333;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>پایگاه اسناد مردمی</h1>
-        <p>آرشیو ویدیوهای ارسالی و مدارک</p>
+        <div class="lang-switch">
+            <button class="lang-btn" onclick="toggleLanguage()">English / فارسی</button>
+        </div>
+        <h1 id="site-title">آرشیو اسناد مردمی ایران</h1>
+        <p id="site-desc">پایگاه داده ویدیوها و مدارک سرکوب اعتراضات سراسری</p>
     </header>
 
     <main class="container">
-
-        <!-- ویدیو شماره ۱ -->
+        <!-- ویدیو 1 -->
         <article class="doc-card">
             <div class="video-wrapper">
-                <iframe 
-                    src="https://odysee.com/$/embed/Z:2e2?r=PD4xSqgmz2XHRwrmr3JLLfP5LBfNabFz" 
-                    allowfullscreen>
-                </iframe>
+                <iframe src="https://odysee.com/$/embed/Z:2e2?r=PD4xSqgmz2XHRwrmr3JLLfP5LBfNabFz" allowfullscreen></iframe>
             </div>
             <div class="card-content">
-                <span class="doc-date">۱۴۰۴/۱۰/۱۳</span>
-                <h3 class="doc-title">مدرک ویدیویی شماره ۱</h3>
-                <p class="doc-desc">توضیحات مربوط به این ویدیو را اینجا بنویسید (مثلا: درگیری در خیابان ... ساعت ...)</p>
+                <span class="doc-date" data-fa="۱۴۰۴/۱۰/۱۳" data-en="2026/01/03">۱۴۰۴/۱۰/۱۳</span>
+                <h3 class="doc-title" data-fa="مدرک ویدیویی شماره ۱" data-en="Video Evidence #1">مدرک ویدیویی شماره ۱</h3>
+                <p class="doc-desc" data-fa="صحنه‌های ضبط شده از خیابان. در این ویدیو جزئیات حادثه مشخص است." data-en="Recorded footage from the streets showing the incident details clearly.">صحنه‌های ضبط شده از خیابان. در این ویدیو جزئیات حادثه مشخص است.</p>
             </div>
         </article>
 
-        <!-- ویدیو شماره ۲ (ضرب و شتم) -->
+        <!-- ویدیو 2 -->
         <article class="doc-card">
             <div class="video-wrapper">
-                <iframe 
-                    src="https://odysee.com/$/embed/Beating-a-protester-with-a-baton---Iran:4?r=PD4xSqgmz2XHRwrmr3JLLfP5LBfNabFz" 
-                    allowfullscreen>
-                </iframe>
+                <iframe src="https://odysee.com/$/embed/Beating-a-protester-with-a-baton---Iran:4?r=PD4xSqgmz2XHRwrmr3JLLfP5LBfNabFz" allowfullscreen></iframe>
             </div>
             <div class="card-content">
-                <span class="doc-date">۱۴۰۴/۱۰/۱۳</span>
-                <h3 class="doc-title">ضرب و شتم معترض با باتون</h3>
-                <p class="doc-desc">هشدار: این ویدیو حاوی صحنه‌های خشونت‌آمیز برخورد نیروهای امنیتی است.</p>
+                <span class="doc-date" data-fa="۱۴۰۴/۱۰/۱۳" data-en="2026/01/03">۱۴۰۴/۱۰/۱۳</span>
+                <h3 class="doc-title" data-fa="ضرب و شتم معترض با باتون" data-en="Brutal Beating of Protester">ضرب و شتم معترض با باتون</h3>
+                <p class="doc-desc" data-fa="هشدار: حاوی صحنه‌های خشونت‌آمیز. نیروهای امنیتی به وضوح در حال حمله به شهروندان هستند." data-en="Warning: Contains graphic violence. Security forces clearly seen attacking civilians.">هشدار: حاوی صحنه‌های خشونت‌آمیز. نیروهای امنیتی به وضوح در حال حمله به شهروندان هستند.</p>
             </div>
         </article>
 
-        <!-- ویدیو شماره ۳ -->
+        <!-- ویدیو 3 -->
         <article class="doc-card">
             <div class="video-wrapper">
-                <iframe 
-                    src="https://odysee.com/$/embed/VID_20260103_012853_536:8?r=PD4xSqgmz2XHRwrmr3JLLfP5LBfNabFz" 
-                    allowfullscreen>
-                </iframe>
+                <iframe src="https://odysee.com/$/embed/VID_20260103_012853_536:8?r=PD4xSqgmz2XHRwrmr3JLLfP5LBfNabFz" allowfullscreen></iframe>
             </div>
             <div class="card-content">
-                <span class="doc-date">۱۴۰۴/۱۰/۱۳</span>
-                <h3 class="doc-title">سند ویدیویی (کد 536)</h3>
-                <p class="doc-desc">محل و زمان دقیق این ویدیو در حال بررسی است.</p>
+                <span class="doc-date" data-fa="۱۴۰۴/۱۰/۱۳" data-en="2026/01/03">۱۴۰۴/۱۰/۱۳</span>
+                <h3 class="doc-title" data-fa="سند ویدیویی (کد 536)" data-en="Video Evidence (Code 536)">سند ویدیویی (کد 536)</h3>
+                <p class="doc-desc" data-fa="شواهد تکمیلی از وقایع شب گذشته. نیاز به شناسایی محل." data-en="Supplementary evidence from last night's events. Location identification needed.">شواهد تکمیلی از وقایع شب گذشته. نیاز به شناسایی محل.</p>
             </div>
         </article>
 
-        <!-- ویدیو شماره ۴ -->
+        <!-- ویدیو 4 -->
         <article class="doc-card">
             <div class="video-wrapper">
-                <iframe 
-                    src="https://odysee.com/$/embed/VID_20260103_011816_461:d?r=PD4xSqgmz2XHRwrmr3JLLfP5LBfNabFz" 
-                    allowfullscreen>
-                </iframe>
+                <iframe src="https://odysee.com/$/embed/VID_20260103_011816_461:d?r=PD4xSqgmz2XHRwrmr3JLLfP5LBfNabFz" allowfullscreen></iframe>
             </div>
             <div class="card-content">
-                <span class="doc-date">۱۴۰۴/۱۰/۱۳</span>
-                <h3 class="doc-title">سند ویدیویی (کد 461)</h3>
-                <p class="doc-desc">توضیحات تکمیلی درباره شواهد موجود در این فیلم.</p>
+                <span class="doc-date" data-fa="۱۴۰۴/۱۰/۱۳" data-en="2026/01/03">۱۴۰۴/۱۰/۱۳</span>
+                <h3 class="doc-title" data-fa="سند ویدیویی (کد 461)" data-en="Video Evidence (Code 461)">سند ویدیویی (کد 461)</h3>
+                <p class="doc-desc" data-fa="تصاویر ارسالی از شهروند خبرنگاران." data-en="Footage sent by citizen journalists.">تصاویر ارسالی از شهروند خبرنگاران.</p>
             </div>
         </article>
-
     </main>
 
     <footer>
-        <p>ارتباط امن بماند.</p>
+        <p id="footer-text">برای امنیت خود از VPN استفاده کنید. صدای ما خاموش نمی‌شود.</p>
     </footer>
+
+    <!-- اسکریپت تغییر زبان -->
+    <script>
+        let isEnglish = false;
+
+        const staticTranslations = {
+            title: { fa: "آرشیو اسناد مردمی ایران", en: "Iran Protests Archive" },
+            desc:  { fa: "پایگاه داده ویدیوها و مدارک سرکوب اعتراضات سراسری", en: "Database of videos and evidence of crackdown on nationwide protests" },
+            footer: { fa: "برای امنیت خود از VPN استفاده کنید. صدای ما خاموش نمی‌شود.", en: "Use a VPN for your safety. Our voice will not be silenced." }
+        };
+
+        function toggleLanguage() {
+            isEnglish = !isEnglish;
+            const body = document.body;
+            
+         
+            if (isEnglish) {
+                body.classList.add('en-lang');
+                document.documentElement.lang = 'en';
+                document.documentElement.dir = 'ltr';
+            } else {
+                body.classList.remove('en-lang');
+                document.documentElement.lang = 'fa';
+                document.documentElement.dir = 'rtl';
+            }
+
+
+            document.getElementById('site-title').innerText = isEnglish ? staticTranslations.title.en : staticTranslations.title.fa;
+            document.getElementById('site-desc').innerText = isEnglish ? staticTranslations.desc.en : staticTranslations.desc.fa;
+            document.getElementById('footer-text').innerText = isEnglish ? staticTranslations.footer.en : staticTranslations.footer.fa;
+
+            
+            const translatableElements = document.querySelectorAll('[data-fa]');
+            translatableElements.forEach(el => {
+                el.innerText = isEnglish ? el.getAttribute('data-en') : el.getAttribute('data-fa');
+            });
+        }
+    </script>
+    
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "VideoGallery",
+      "name": "Iran Protests Archive",
+      "description": "Archive of user-generated content documenting human rights violations in Iran.",
+      "keywords": "Iran, Protests, Mahsa Amini, IRGC"
+    }
+    </script>
 
 </body>
 </html>
