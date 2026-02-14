@@ -13,9 +13,9 @@
             --bg-body: #050505;
             --bg-card: #141414;
             --text-primary: #ffffff;
-            --text-muted: #999;
-            --accent: #e53935; /* قرمز کمی روشن‌تر برای کنتراست */
-            --glass-bg: rgba(20, 20, 20, 0.75); /* پس‌زمینه شیشه‌ای */
+            --text-muted: #bbb;
+            --accent: #ff1744; /* قرمز جیغ‌تر برای تاکید */
+            --glass-bg: rgba(20, 20, 20, 0.65); /* شیشه‌ای */
             --glass-border: rgba(255, 255, 255, 0.1);
             --font-main: 'Vazirmatn', sans-serif;
         }
@@ -28,28 +28,27 @@
             font-family: var(--font-main);
             line-height: 1.6;
             overflow-x: hidden;
-            padding-bottom: 50px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
-        /* --- استایل هدر شناور و جدید --- */
+        /* --- هدر شناور و شیشه‌ای --- */
         header {
-            position: sticky; /* حالت چسبنده */
-            top: 20px; /* فاصله از بالا هنگام اسکرول */
+            position: sticky;
+            top: 20px;
             z-index: 1000;
-            
-            /* تنظیمات ظاهری */
             width: 90%;
             max-width: 1000px;
-            margin: 20px auto 40px auto; /* فاصله اولیه از بالا */
+            margin: 20px auto 0 auto; /* فاصله از بالا */
             padding: 12px 25px;
             
-            /* افکت شیشه‌ای و گرد */
             background: var(--glass-bg);
-            backdrop-filter: blur(15px); /* تاری شدید */
-            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
-            border-radius: 50px; /* کپسولی شدن */
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* سایه عمیق */
+            border-radius: 50px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
             
             display: flex;
             justify-content: space-between;
@@ -57,64 +56,61 @@
             transition: all 0.3s ease;
         }
 
-        /* وقتی موس روی هدر می‌رود کمی روشن‌تر شود */
-        header:hover {
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
-        }
+        header:hover { border-color: rgba(255, 255, 255, 0.25); }
 
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .brand { display: flex; align-items: center; gap: 12px; }
+        .brand h1 { font-size: 1.1rem; font-weight: 800; letter-spacing: -0.5px; margin: 0; }
+        .brand i { color: var(--accent); font-size: 1.2rem; }
 
-        .brand h1 {
-            font-size: 1.2rem;
-            font-weight: 800;
-            color: #fff;
-            letter-spacing: -0.5px;
-        }
-        
-        .brand i { color: var(--accent); font-size: 1.3rem; }
-
-        /* دکمه جستجو/زبان در هدر */
-        .header-actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .icon-btn {
-            background: rgba(255,255,255,0.05);
+        .header-actions button {
+            background: rgba(255,255,255,0.08);
             border: none;
-            width: 35px;
-            height: 35px;
+            width: 38px; height: 38px;
             border-radius: 50%;
-            color: #fff;
-            cursor: pointer;
+            color: #fff; cursor: pointer;
             transition: 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            margin-left: 5px;
         }
-        
-        .icon-btn:hover { background: var(--accent); transform: scale(1.1); }
+        .header-actions button:hover { background: var(--accent); transform: scale(1.1); }
 
-        /* --- کانتینر اصلی --- */
+        /* --- بخش معرفی (Hero Section) --- */
+        .hero {
+            text-align: center;
+            padding: 4rem 1rem 2rem 1rem; /* فاصله از بالا زیاد است تا زیر هدر نرود */
+            background: radial-gradient(circle at top, rgba(211, 47, 47, 0.15), transparent 70%);
+        }
+
+        .hero h2 {
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 20px rgba(255, 23, 68, 0.4);
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1rem;
+        }
+
+        /* --- کانتینر ویدیوها --- */
         .container {
             max-width: 1200px;
-            margin: 0 auto;
+            width: 100%;
+            margin: 2rem auto;
             padding: 0 20px;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            flex-grow: 1; /* باعث می‌شود فوتر به پایین بچسبد */
         }
 
         /* --- کارت‌ها --- */
         .card {
             background: var(--bg-card);
             border: 1px solid #222;
-            border-radius: 20px; /* کارت‌ها هم گردتر شدند */
+            border-radius: 24px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -122,68 +118,56 @@
         }
 
         .card:hover {
-            transform: translateY(-7px);
-            box-shadow: 0 10px 30px rgba(229, 57, 53, 0.15); /* سایه قرمز ملایم */
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
             border-color: #333;
         }
 
         .video-wrapper {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 */
+            padding-bottom: 56.25%;
             background: #000;
         }
-        
         .video-wrapper iframe {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;
         }
 
         .card-content { padding: 1.5rem; }
-
-        .card-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 0.8rem;
-            line-height: 1.5;
-        }
-
-        .card-desc {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: 1rem;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .meta-tags {
-            margin-top: auto;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
+        .card-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.8rem; color: #fff; }
+        .card-desc { font-size: 0.9rem; color: #aaa; margin-bottom: 1rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         
-        .tag {
-            font-size: 0.75rem;
-            background: #1f1f1f;
-            padding: 4px 10px;
-            border-radius: 12px;
-            color: #bbb;
-        }
+        .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+        .tag { font-size: 0.75rem; background: #222; padding: 4px 10px; border-radius: 8px; color: #888; transition: 0.2s;}
+        .tag:hover { color: #fff; background: var(--accent); }
 
-        /* لودینگ */
-        .loading {
-            grid-column: 1/-1;
+        /* --- فوتر --- */
+        footer {
+            margin-top: 4rem;
+            padding: 2rem;
+            background: #080808;
+            border-top: 1px solid #1a1a1a;
             text-align: center;
-            padding: 3rem;
-            color: var(--text-muted);
-            font-size: 1.1rem;
         }
 
-        /* موبایل */
+        .vpn-alert {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 23, 68, 0.1);
+            color: var(--accent);
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 23, 68, 0.2);
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .copy-text { color: #444; font-size: 0.8rem; }
+
         @media (max-width: 600px) {
-            header { width: 95%; top: 10px; padding: 10px 15px; }
-            .brand h1 { font-size: 1rem; }
+            header { width: 95%; top: 10px; }
+            .hero h2 { font-size: 1.5rem; }
         }
     </style>
 </head>
@@ -192,51 +176,67 @@
     <!-- هدر شناور -->
     <header>
         <div class="brand">
-            <i class="fas fa-compact-disc fa-spin" style="animation-duration: 3s;"></i>
+            <i class="fas fa-archive"></i>
             <h1>آرشیو انقلاب</h1>
         </div>
         <div class="header-actions">
-            <button class="icon-btn" title="جستجو"><i class="fas fa-search"></i></button>
-            <button class="icon-btn" title="زبان"><i class="fas fa-globe"></i></button>
+            <button title="جستجو"><i class="fas fa-search"></i></button>
+            <button title="تغییر زبان"><i class="fas fa-globe"></i></button>
         </div>
     </header>
 
+    <!-- بخش متن معرفی (Hero) - زیر هدر -->
+    <section class="hero">
+        <h2>هیچ جنایتی فراموش نمی‌شود</h2>
+        <p>پایگاه داده مستقل برای مستندسازی ویدیوهای انقلاب. این اسناد روی بلاک‌چین ذخیره شده و غیرقابل حذف هستند.</p>
+    </section>
+
+    <!-- لیست ویدیوها -->
     <main class="container" id="video-grid">
-        <div class="loading">
-            <i class="fas fa-circle-notch fa-spin"></i> در حال بارگذاری اسناد از شبکه امن...
+        <!-- اینجا توسط جاوا اسکریپت پر می‌شود -->
+        <div style="grid-column: 1/-1; text-align: center; color: #666; padding: 2rem;">
+            <i class="fas fa-circle-notch fa-spin"></i> در حال بارگذاری اسناد...
         </div>
     </main>
 
+    <!-- فوتر -->
+    <footer>
+        <div class="vpn-alert">
+            <i class="fas fa-shield-alt"></i>
+            برای امنیت خود حتماً از VPN امن استفاده کنید
+        </div>
+        <p class="copy-text">
+            © 2025 Iran Revolution Archive. Hosted on IPFS & GitHub.<br>
+            صدای ما خاموش نمی‌شود.
+        </p>
+    </footer>
+
     <script>
         // ==========================================
-        // لیست ویدیوها (کافیست ID یا لینک LBRY را اینجا بگذاری)
-        // برای تست چند نمونه گذاشتم
+        // لیست ویدیوها (نمونه)
         // ==========================================
-        
-        // نکته: این آرایه شبیه‌سازی است برای اینکه بدون سرور ببینی چطور کار می‌کند.
-        // در نسخه واقعی باید از API استفاده کنی، اما اینجا دستی وارد می‌کنیم تا دیزاین را ببینی.
         const videos = [
             {
-                title: "تظاهرات شبانه در تهران",
-                desc: "مردم با روشن کردن آتش خیابان را بسته‌اند. نیروهای امنیتی جرات نزدیک شدن ندارند.",
-                tags: ["تهران", "انقلاب", "شبانه"],
+                title: "تظاهرات شبانه در تهران - ستارخان",
+                desc: "مردم با روشن کردن آتش خیابان را بسته‌اند. شعارهای ضد حکومتی شنیده می‌شود.",
+                tags: ["تهران", "ستارخان", "شبانه"],
                 embed: "https://odysee.com/$/embed/Z:2e2?r=PD4xSqgmz2XHRwrmr3JLLfP5LBfNabFz" 
             },
             {
-                title: "شعار زن زندگی آزادی در دانشگاه",
-                desc: "دانشجویان دانشگاه شریف علیه استبداد شعار می‌دهند.",
-                tags: ["دانشگاه", "شریف", "زن_زندگی_آزادی"],
+                title: "حمله لباس شخصی‌ها به دانشجویان",
+                desc: "نیروهای امنیتی با باتون به دانشجویان دانشگاه شریف حمله کردند.",
+                tags: ["دانشگاه", "سرکوب", "دانشجو"],
                 embed: "https://odysee.com/$/embed/Beating-a-protester-with-a-baton---Iran:4?r=PD4xSqgmz2XHRwrmr3JLLfP5LBfNabFz"
             },
             {
-                title: "مستندات سرکوب در کردستان",
-                desc: "استفاده از سلاح جنگی علیه غیرنظامیان در جوانرود.",
+                title: "شلیک مستقیم به مردم در جوانرود",
+                desc: "استفاده از سلاح جنگی کلاشنیکف علیه معترضان غیر مسلح.",
                 tags: ["کردستان", "جوانرود", "جنایت_جنگی"],
                 embed: "https://odysee.com/$/embed/VID_20260103_012853_536:8?r=PD4xSqgmz2XHRwrmr3JLLfP5LBfNabFz"
             },
             {
-                title: "همبستگی جهانی با ایران",
-                desc: "تظاهرات ایرانیان خارج از کشور در برلین با حضور صدها هزار نفر.",
+                title: "همبستگی ایرانیان در برلین",
+                desc: "بزرگترین تجمع ایرانیان خارج از کشور برای حمایت از انقلاب.",
                 tags: ["برلین", "همبستگی", "خارج_کشور"],
                 embed: "https://odysee.com/$/embed/VID_20260103_011816_461:d?r=PD4xSqgmz2XHRwrmr3JLLfP5LBfNabFz"
             }
@@ -244,12 +244,10 @@
 
         const grid = document.getElementById('video-grid');
 
-        // تابع ساخت کارت‌ها
         function renderVideos() {
-            grid.innerHTML = ''; // پاک کردن لودینگ
+            grid.innerHTML = ''; 
             
             videos.forEach(vid => {
-                // ساخت تگ‌ها
                 let tagsHtml = vid.tags.map(t => `<span class="tag">#${t}</span>`).join('');
 
                 const cardHtml = `
@@ -260,7 +258,7 @@
                         <div class="card-content">
                             <h3 class="card-title">${vid.title}</h3>
                             <p class="card-desc">${vid.desc}</p>
-                            <div class="meta-tags">${tagsHtml}</div>
+                            <div class="tags">${tagsHtml}</div>
                         </div>
                     </article>
                 `;
@@ -268,9 +266,8 @@
             });
         }
 
-        // اجرای تابع با کمی تاخیر برای نمایش افکت لودینگ (نمایشی)
-        setTimeout(renderVideos, 1000);
-
+        setTimeout(renderVideos, 800);
     </script>
+
 </body>
 </html>
