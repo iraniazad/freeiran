@@ -3,63 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>آرشیو اسناد انقلاب | Iran Revolution Archive</title>
     
-    <!-- سئو -->
-    <title>آرشیو اسناد انقلاب ایران | Iran Revolution Archive</title>
-    <meta name="description" content="پایگاه داده اسناد و ویدیوهای جنایات جمهوری اسلامی و اعتراضات مردمی.">
-    <meta name="robots" content="index, follow">
-    
-    <!-- فونت‌ها -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-
-    <!-- آیکون (برای زیبایی بیشتر) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
-            --bg-body: #0a0a0a;
-            --bg-card: #161616;
-            --bg-header: rgba(16, 16, 16, 0.95);
+            --bg-body: #050505;
+            --bg-card: #141414;
             --text-primary: #ffffff;
-            --text-secondary: #a0a0a0;
-            --accent: #d32f2f; /* قرمز اصلی */
-            --accent-hover: #b71c1c;
-            --border: #333;
-            --radius: 12px;
-            --font-fa: 'Vazirmatn', sans-serif;
-            --font-en: 'Inter', sans-serif;
-            --shadow: 0 10px 30px rgba(0,0,0,0.5);
+            --text-muted: #999;
+            --accent: #e53935; /* قرمز کمی روشن‌تر برای کنتراست */
+            --glass-bg: rgba(20, 20, 20, 0.75); /* پس‌زمینه شیشه‌ای */
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --font-main: 'Vazirmatn', sans-serif;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; outline: none; }
-
+        
         body {
             background-color: var(--bg-body);
             color: var(--text-primary);
-            font-family: var(--font-fa);
+            font-family: var(--font-main);
             line-height: 1.6;
             overflow-x: hidden;
+            padding-bottom: 50px;
         }
 
-        body.en-lang { font-family: var(--font-en); direction: ltr; }
-
-        /* --- Header Styling --- */
+        /* --- استایل هدر شناور و جدید --- */
         header {
-            background: var(--bg-header);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-            padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            position: sticky; /* حالت چسبنده */
+            top: 20px; /* فاصله از بالا هنگام اسکرول */
+            z-index: 1000;
+            
+            /* تنظیمات ظاهری */
+            width: 90%;
+            max-width: 1000px;
+            margin: 20px auto 40px auto; /* فاصله اولیه از بالا */
+            padding: 12px 25px;
+            
+            /* افکت شیشه‌ای و گرد */
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px); /* تاری شدید */
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px; /* کپسولی شدن */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* سایه عمیق */
+            
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
+            transition: all 0.3s ease;
+        }
+
+        /* وقتی موس روی هدر می‌رود کمی روشن‌تر شود */
+        header:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
         }
 
         .brand {
@@ -68,362 +69,208 @@
             gap: 10px;
         }
 
-        .brand-icon {
-            color: var(--accent);
-            font-size: 1.5rem;
-        }
-
         .brand h1 {
-            font-size: 1.4rem;
-            font-weight: 900;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #fff;
             letter-spacing: -0.5px;
         }
+        
+        .brand i { color: var(--accent); font-size: 1.3rem; }
 
-        .header-controls {
+        /* دکمه جستجو/زبان در هدر */
+        .header-actions {
             display: flex;
             gap: 10px;
-            align-items: center;
         }
 
-        /* دکمه زبان */
-        .lang-btn {
-            background: transparent;
-            color: var(--text-secondary);
-            border: 1px solid var(--border);
-            padding: 8px 16px;
-            border-radius: 50px;
+        .icon-btn {
+            background: rgba(255,255,255,0.05);
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            color: #fff;
             cursor: pointer;
-            font-size: 0.85rem;
-            font-family: inherit;
             transition: 0.3s;
             display: flex;
             align-items: center;
-            gap: 8px;
-        }
-
-        .lang-btn:hover {
-            border-color: var(--text-primary);
-            color: var(--text-primary);
-            background: rgba(255,255,255,0.05);
-        }
-
-        /* نوار جستجو */
-        .search-box {
-            position: relative;
-            display: none; /* در موبایل مخفی شود اگر جا نیست */
-        }
-        @media(min-width: 768px) { .search-box { display: block; } }
-
-        .search-box input {
-            background: #222;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 6px;
-            color: #fff;
-            width: 250px;
-            font-family: inherit;
-        }
-
-        /* --- Hero Section --- */
-        .hero {
-            text-align: center;
-            padding: 4rem 1rem;
-            background: radial-gradient(circle at center, #1a0505 0%, var(--bg-body) 70%);
-        }
-
-        .hero h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            font-weight: 800;
-        }
-
-        .hero p {
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto;
-            font-size: 1.1rem;
-        }
-
-        .stats-bar {
-            margin-top: 2rem;
-            display: flex;
             justify-content: center;
-            gap: 2rem;
-            font-size: 0.9rem;
-            color: var(--accent);
         }
+        
+        .icon-btn:hover { background: var(--accent); transform: scale(1.1); }
 
-        /* --- Main Grid --- */
+        /* --- کانتینر اصلی --- */
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 0 20px;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 30px;
         }
 
-        /* --- Video Card Design --- */
+        /* --- کارت‌ها --- */
         .card {
             background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
+            border: 1px solid #222;
+            border-radius: 20px; /* کارت‌ها هم گردتر شدند */
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow);
-            border-color: var(--accent);
+            transform: translateY(-7px);
+            box-shadow: 0 10px 30px rgba(229, 57, 53, 0.15); /* سایه قرمز ملایم */
+            border-color: #333;
         }
 
-        .video-container {
+        .video-wrapper {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0;
+            padding-bottom: 56.25%; /* 16:9 */
             background: #000;
         }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
+        
+        .video-wrapper iframe {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;
         }
 
-        .card-body {
-            padding: 1.5rem;
-        }
-
-        .meta-row {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            margin-bottom: 10px;
-            align-items: center;
-        }
-
-        .date-badge {
-            background: rgba(211, 47, 47, 0.1);
-            color: var(--accent);
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-weight: bold;
-        }
-
-        .location {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
+        .card-content { padding: 1.5rem; }
 
         .card-title {
-            font-size: 1.25rem;
-            margin-bottom: 10px;
+            font-size: 1.1rem;
             font-weight: 700;
-            line-height: 1.4;
+            margin-bottom: 0.8rem;
+            line-height: 1.5;
         }
 
         .card-desc {
-            font-size: 0.95rem;
-            color: #ccc;
-            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
             display: -webkit-box;
-            -webkit-line-clamp: 3; /* محدود کردن به 3 خط */
+            -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
 
-        .tags {
+        .meta-tags {
+            margin-top: auto;
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            margin-top: auto;
-        }
-
-        .tag {
-            font-size: 0.75rem;
-            background: #252525;
-            padding: 4px 10px;
-            border-radius: 50px;
-            color: #888;
-            transition: 0.2s;
-        }
-        .tag:hover { color: #fff; background: #333; }
-
-        /* --- Footer --- */
-        footer {
-            border-top: 1px solid var(--border);
-            padding: 3rem 1rem;
-            text-align: center;
-            background: #050505;
-            margin-top: 3rem;
         }
         
-        .vpn-warning {
-            color: var(--accent);
-            font-weight: bold;
-            margin-bottom: 1rem;
-            display: inline-block;
-            border: 1px solid var(--accent);
-            padding: 10px 20px;
-            border-radius: 8px;
-            background: rgba(211, 47, 47, 0.05);
+        .tag {
+            font-size: 0.75rem;
+            background: #1f1f1f;
+            padding: 4px 10px;
+            border-radius: 12px;
+            color: #bbb;
         }
 
-        /* --- Mobile Tweaks --- */
+        /* لودینگ */
+        .loading {
+            grid-column: 1/-1;
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* موبایل */
         @media (max-width: 600px) {
-            .container { grid-template-columns: 1fr; padding: 1rem; }
-            .hero h2 { font-size: 1.8rem; }
-            header { padding: 1rem; }
+            header { width: 95%; top: 10px; padding: 10px 15px; }
+            .brand h1 { font-size: 1rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- هدر سایت -->
+    <!-- هدر شناور -->
     <header>
         <div class="brand">
-            <i class="fas fa-archive brand-icon"></i>
-            <div>
-                <h1 data-fa="آرشیو انقلاب" data-en="Revolution Archive">آرشیو انقلاب</h1>
-            </div>
+            <i class="fas fa-compact-disc fa-spin" style="animation-duration: 3s;"></i>
+            <h1>آرشیو انقلاب</h1>
         </div>
-        
-        <div class="header-controls">
-            <div class="search-box">
-                <input type="text" placeholder="جستجو در اسناد..." id="search-input">
-            </div>
-            <button class="lang-btn" onclick="toggleLanguage()">
-                <i class="fas fa-globe"></i>
-                <span id="lang-text">English</span>
-            </button>
+        <div class="header-actions">
+            <button class="icon-btn" title="جستجو"><i class="fas fa-search"></i></button>
+            <button class="icon-btn" title="زبان"><i class="fas fa-globe"></i></button>
         </div>
     </header>
 
-    <!-- بخش معرفی (Hero) -->
-    <section class="hero">
-        <h2 data-fa="هیچ جنایتی فراموش نمی‌شود" data-en="No Crime Will Be Forgotten">هیچ جنایتی فراموش نمی‌شود</h2>
-        <p data-fa="پایگاه داده مستقل و غیرمتمرکز برای مستندسازی نقض حقوق بشر در ایران. ویدیوهای شما سند آزادی فرداست." 
-           data-en="Independent decentralized database documenting human rights violations in Iran. Your videos are the evidence for tomorrow's freedom.">
-           پایگاه داده مستقل و غیرمتمرکز برای مستندسازی نقض حقوق بشر در ایران. ویدیوهای شما سند آزادی فرداست.
-        </p>
-        <div class="stats-bar">
-            <span><i class="fas fa-video"></i> <span data-fa="۴ سند جدید" data-en="4 New Docs">۴ سند جدید</span></span>
-            <span><i class="fas fa-user-shield"></i> <span data-fa="بدون سانسور" data-en="Uncensored">بدون سانسور</span></span>
+    <main class="container" id="video-grid">
+        <div class="loading">
+            <i class="fas fa-circle-notch fa-spin"></i> در حال بارگذاری اسناد از شبکه امن...
         </div>
-    </section>
-
-    <!-- لیست ویدیوها -->
-    <main class="container">
-        
-        <!-- کارت ۱ -->
-        <article class="card">
-            <div class="video-container">
-                <!-- جایگذاری کد Odysee -->
-                <iframe src="https://odysee.com/$/embed/Z:2e2?r=PD4xSqgmz2XHRwrmr3JLLfP5LBfNabFz" allowfullscreen></iframe>
-            </div>
-            <div class="card-body">
-                <div class="meta-row">
-                    <span class="date-badge">۱۴۰۴/۱۰/۱۳</span>
-                    <span class="location"><i class="fas fa-map-marker-alt"></i> تهران، ستارخان</span>
-                </div>
-                <h3 class="card-title" data-fa="تظاهرات شبانه و شلیک گاز اشک‌آور" data-en="Night protests and tear gas shooting">تظاهرات شبانه و شلیک گاز اشک‌آور</h3>
-                <p class="card-desc" data-fa="نیروهای سرکوبگر به سمت جمعیت گاز اشک‌آور شلیک کردند. مردم شعار مرگ بر دیکتاتور می‌دهند." data-en="Repressive forces fired tear gas at the crowd. People chanting death to the dictator.">نیروهای سرکوبگر به سمت جمعیت گاز اشک‌آور شلیک کردند. مردم شعار مرگ بر دیکتاتور می‌دهند.</p>
-                <div class="tags">
-                    <span class="tag">#تهران</span>
-                    <span class="tag">#سرکوب</span>
-                    <span class="tag">#گاز_اشک‌آور</span>
-                </div>
-            </div>
-        </article>
-
-        <!-- کارت ۲ -->
-        <article class="card">
-            <div class="video-container">
-                <iframe src="https://odysee.com/$/embed/Beating-a-protester-with-a-baton---Iran:4?r=PD4xSqgmz2XHRwrmr3JLLfP5LBfNabFz" allowfullscreen></iframe>
-            </div>
-            <div class="card-body">
-                <div class="meta-row">
-                    <span class="date-badge">۱۴۰۴/۱۰/۱۲</span>
-                    <span class="location"><i class="fas fa-map-marker-alt"></i> کرج، گوهردشت</span>
-                </div>
-                <h3 class="card-title" data-fa="ضرب و شتم شدید معترض" data-en="Severe beating of a protester">ضرب و شتم شدید معترض</h3>
-                <p class="card-desc" data-fa="هشدار: حاوی صحنه‌های دلخراش. پنج مامور لباس شخصی به یک جوان حمله می‌کنند." data-en="Warning: Graphic content. Five plainclothes officers attacking a young man.">هشدار: حاوی صحنه‌های دلخراش. پنج مامور لباس شخصی به یک جوان حمله می‌کنند.</p>
-                <div class="tags">
-                    <span class="tag">#کرج</span>
-                    <span class="tag">#خشونت_شدید</span>
-                    <span class="tag">#لباس_شخصی</span>
-                </div>
-            </div>
-        </article>
-
-        <!-- کارت ۳ -->
-        <article class="card">
-            <div class="video-container">
-                <iframe src="https://odysee.com/$/embed/VID_20260103_012853_536:8?r=PD4xSqgmz2XHRwrmr3JLLfP5LBfNabFz" allowfullscreen></iframe>
-            </div>
-            <div class="card-body">
-                <div class="meta-row">
-                    <span class="date-badge">۱۴۰۴/۱۰/۱۰</span>
-                    <span class="location"><i class="fas fa-map-marker-alt"></i> نامشخص</span>
-                </div>
-                <h3 class="card-title" data-fa="آتش زدن بنر حکومتی" data-en="Burning regime banner">آتش زدن بنر حکومتی</h3>
-                <p class="card-desc" data-fa="جوانان انقلابی بنر بزرگ میدان اصلی را به آتش کشیدند." data-en="Revolutionary youth set fire to the main square banner.">جوانان انقلابی بنر بزرگ میدان اصلی را به آتش کشیدند.</p>
-                <div class="tags">
-                    <span class="tag">#اقدام_انقلابی</span>
-                    <span class="tag">#آتش</span>
-                </div>
-            </div>
-        </article>
-
     </main>
 
-    <!-- فوتر -->
-    <footer>
-        <div class="vpn-warning">
-            <i class="fas fa-shield-alt"></i>
-            <span data-fa="برای امنیت خود حتما از VPN امن استفاده کنید" data-en="Please use a secure VPN for your safety">برای امنیت خود حتما از VPN امن استفاده کنید</span>
-        </div>
-        <p style="color: #666; margin-top: 10px; font-size: 0.8rem;">
-            &copy; 2025 Iran Revolution Archive. hosted on IPFS/GitHub.
-        </p>
-    </footer>
-
-    <!-- جاوا اسکریپت -->
     <script>
-        let isEnglish = false;
-
-        function toggleLanguage() {
-            isEnglish = !isEnglish;
-            const body = document.body;
-            const btnText = document.getElementById('lang-text');
-            const searchInput = document.getElementById('search-input');
-            
-            if (isEnglish) {
-                body.classList.add('en-lang');
-                document.documentElement.lang = 'en';
-                document.documentElement.dir = 'ltr';
-                btnText.innerText = "فارسی";
-                searchInput.placeholder = "Search documents...";
-            } else {
-                body.classList.remove('en-lang');
-                document.documentElement.lang = 'fa';
-                document.documentElement.dir = 'rtl';
-                btnText.innerText = "English";
-                searchInput.placeholder = "جستجو در اسناد...";
+        // ==========================================
+        // لیست ویدیوها (کافیست ID یا لینک LBRY را اینجا بگذاری)
+        // برای تست چند نمونه گذاشتم
+        // ==========================================
+        
+        // نکته: این آرایه شبیه‌سازی است برای اینکه بدون سرور ببینی چطور کار می‌کند.
+        // در نسخه واقعی باید از API استفاده کنی، اما اینجا دستی وارد می‌کنیم تا دیزاین را ببینی.
+        const videos = [
+            {
+                title: "تظاهرات شبانه در تهران",
+                desc: "مردم با روشن کردن آتش خیابان را بسته‌اند. نیروهای امنیتی جرات نزدیک شدن ندارند.",
+                tags: ["تهران", "انقلاب", "شبانه"],
+                embed: "https://odysee.com/$/embed/Z:2e2?r=PD4xSqgmz2XHRwrmr3JLLfP5LBfNabFz" 
+            },
+            {
+                title: "شعار زن زندگی آزادی در دانشگاه",
+                desc: "دانشجویان دانشگاه شریف علیه استبداد شعار می‌دهند.",
+                tags: ["دانشگاه", "شریف", "زن_زندگی_آزادی"],
+                embed: "https://odysee.com/$/embed/Beating-a-protester-with-a-baton---Iran:4?r=PD4xSqgmz2XHRwrmr3JLLfP5LBfNabFz"
+            },
+            {
+                title: "مستندات سرکوب در کردستان",
+                desc: "استفاده از سلاح جنگی علیه غیرنظامیان در جوانرود.",
+                tags: ["کردستان", "جوانرود", "جنایت_جنگی"],
+                embed: "https://odysee.com/$/embed/VID_20260103_012853_536:8?r=PD4xSqgmz2XHRwrmr3JLLfP5LBfNabFz"
+            },
+            {
+                title: "همبستگی جهانی با ایران",
+                desc: "تظاهرات ایرانیان خارج از کشور در برلین با حضور صدها هزار نفر.",
+                tags: ["برلین", "همبستگی", "خارج_کشور"],
+                embed: "https://odysee.com/$/embed/VID_20260103_011816_461:d?r=PD4xSqgmz2XHRwrmr3JLLfP5LBfNabFz"
             }
+        ];
 
-            const translatableElements = document.querySelectorAll('[data-fa]');
-            translatableElements.forEach(el => {
-                el.innerText = isEnglish ? el.getAttribute('data-en') : el.getAttribute('data-fa');
+        const grid = document.getElementById('video-grid');
+
+        // تابع ساخت کارت‌ها
+        function renderVideos() {
+            grid.innerHTML = ''; // پاک کردن لودینگ
+            
+            videos.forEach(vid => {
+                // ساخت تگ‌ها
+                let tagsHtml = vid.tags.map(t => `<span class="tag">#${t}</span>`).join('');
+
+                const cardHtml = `
+                    <article class="card">
+                        <div class="video-wrapper">
+                            <iframe src="${vid.embed}" allowfullscreen></iframe>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">${vid.title}</h3>
+                            <p class="card-desc">${vid.desc}</p>
+                            <div class="meta-tags">${tagsHtml}</div>
+                        </div>
+                    </article>
+                `;
+                grid.innerHTML += cardHtml;
             });
         }
+
+        // اجرای تابع با کمی تاخیر برای نمایش افکت لودینگ (نمایشی)
+        setTimeout(renderVideos, 1000);
+
     </script>
 </body>
 </html>
